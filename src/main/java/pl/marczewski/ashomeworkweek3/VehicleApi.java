@@ -2,6 +2,7 @@ package pl.marczewski.ashomeworkweek3;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,10 @@ public class VehicleApi {
         this.vehicleService = vehicleService;
     }
 
-    @GetMapping
+    @GetMapping(produces = {
+            MediaType.APPLICATION_ATOM_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE}
+    )
     public ResponseEntity<List<Vehicle>> getVehicles() {
         return new ResponseEntity<>(vehicleService.getVehicleList(), HttpStatus.OK);
     }
